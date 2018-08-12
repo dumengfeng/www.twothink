@@ -1,32 +1,74 @@
-{extend name="base/common"/}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Bootstrap 101 Template</title>
 
-{block name="header"}
-    <header class="jumbotron subhead" id="overview">
-		<div class="container">
-			<h2>{$info.title}</h2>
-			<p>
-				<span  class="pull-left">
-					<span class="author">{$info.uid|get_username}</span>
-					<span> 发表于 {$info.create_time|date='Y-m-d H:i',###}</span>
-				</span>
-				<span class="pull-right">
-					{article:prev name="prev" info="info"}
-                        <a href="{:url('',array('id'=>$prev['id']))}">上一篇</a>
-                    {/article:prev} 
-                    {article:next name="next" info="info"}
-                        <a href="{:url('?id='.$next['id'])}">下一篇</a>
-                    {/article:next}
-			</p>
-		</div>
-	</header>
-{/block}
+    <!-- Bootstrap -->
+    <link href="/static/home/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/home/css/style.css" rel="stylesheet">
+    <style>
+        .main {
+            margin-bottom: 60px;
+        }
 
-{block name="body"}
-    <div class="span9 main-content">
-        <!-- Contents
-        ================================================== -->
-        <section id="contents">{$info.content}</section>
-        <hr/>
-        {:hook('documentDetailAfter',$info)}
-    </div>
-{/block}
+        .indexLabel {
+            padding: 10px 0;
+            margin: 10px 0 0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <!--导航部分-->
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+        <div class="container-fluid text-center">
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="index.html" class="navbar-link">首页</a></p>
+            </div>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="#" class="navbar-link">服务</a></p>
+            </div>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="#" class="navbar-link">发现</a></p>
+            </div>
+            <div class="col-xs-3">
+                <p class="navbar-text"><a href="#" class="navbar-link">我的</a></p>
+            </div>
+        </div>
+    </nav>
+    <!--导航结束-->
+        <div class="container-fluid">
+            <div name="category_id" id="div1" category="{$info.category_id}"></div>
+            <h3 class="noticeDetailTitle" id="title"><strong>{$info.title}</strong></h3>
+            <div class="noticeDetailInfo" id="uid" uid="{$info.uid}">发布者:{$info.uid|get_username}</div>
+            <div class="noticeDetailInfo">发布时间：{$info.create_time|date='Y-m-d H:i',###}</div>
+            <section id="contents">{$info.content}</section>
+            {if $info.category_id==47}
+            {if !is_login()}
+            <a href="{:url('user/user/profile')}">活动报名</a>
+            {/if}
+            <input type="button" value="活动报名" id="btn1" sid="{$info.id}" onclick="test()"/>{$Think.cookie.password}
+            {/if}
+        </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/home/jquery-1.11.2.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/static/home/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        test = function () {
+            var category_id = $('#div1').attr('category');
+            var uid = $('#uid').attr('uid');//住户id
+            var sid = $('#btn1').attr('sid');//活动id
+            $.post('/home/sign/create', "uid=" + uid +"&sid=" +sid);
+        }
+    });
+</script>
+</body>
+</html>

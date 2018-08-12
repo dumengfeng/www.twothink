@@ -1,5 +1,7 @@
 <?php
 namespace app\home\controller;
+use app\common\controller\UcApi;
+use think\Db;
 use think\Request;
 use app\home\model\Document;
 /**
@@ -53,7 +55,7 @@ class Article extends Home {
                 <a href="/home/article/detail/id/{$data->id}.html"><img class="img-thumbnail" src="{$path}"/></a>
             </div>
             <div class="col-xs-10">
-                <p class="title">{$data['title']}</p>
+                <a href="/home/article/detail/id/{$data->id}.html"><p class="title">{$data['title']}</p></a>
                 <p class="intro">{$data['description']}</p>
                 <p class="info">浏览:({$data['view']}) <span class="pull-right">发表于 {$data['create_time']}</span></p>
             </div>
@@ -70,7 +72,8 @@ html;
 		if(!($id && is_numeric($id))){
 			$this->error('文档ID错误！');
 		}
-
+//        //检测分类
+//        $category = $this->category();
 		/* 页码检测 */
 		$p = intval($p);
 		$p = empty($p) ? 1 : $p;
@@ -124,5 +127,4 @@ html;
 			$this->error('分类不存在或被禁用！');
 		}
 	}
-
 }

@@ -61,9 +61,6 @@
         </div>
         {/volist}
         <div id="div">
-
-
-
         </div>
         <div id="list">
             <button class="btn btn-default btn-block get_more" onclick="getLists()">获取更多。。。</button>
@@ -79,6 +76,9 @@
         var page = 2;
         getLists = function () {
             var category_id = $('#div1').attr('category');
+            if (category_id==null){
+                $('#list').html('<span>没有啦。。。</span>');
+            }
             $.get('/home/article/lists', "category=" + category_id + "&p=" + page + "", function (data) {
                 if (data) {
                     $('#div').append(data);

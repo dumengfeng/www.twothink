@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:74:"D:\TP5\twothink\public/../application/home/view/default/article\lists.html";i:1533894313;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:74:"D:\TP5\twothink\public/../application/home/view/default/article\lists.html";i:1533971779;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -62,9 +62,6 @@
         </div>
         <?php endforeach; endif; else: echo "" ;endif; ?>
         <div id="div">
-
-
-
         </div>
         <div id="list">
             <button class="btn btn-default btn-block get_more" onclick="getLists()">获取更多。。。</button>
@@ -80,6 +77,9 @@
         var page = 2;
         getLists = function () {
             var category_id = $('#div1').attr('category');
+            if (category_id==null){
+                $('#list').html('<span>没有啦。。。</span>');
+            }
             $.get('/home/article/lists', "category=" + category_id + "&p=" + page + "", function (data) {
                 if (data) {
                     $('#div').append(data);
