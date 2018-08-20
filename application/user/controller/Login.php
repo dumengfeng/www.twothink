@@ -9,8 +9,11 @@
 
 namespace app\user\controller;
 use app\common\controller\UcApi;
+use app\home\controller\Wechat;
+use EasyWeChat\Factory;
 use think\Controller;
 use think\Cookie;
+use think\Session;
 
 /**
  * 用户登入
@@ -76,13 +79,17 @@ class Login extends Controller {
 			/* 检测密码 */
 			if($password != $repassword){
 				$this->error('密码和重复密码不一致！');
-			}			
-
+			}
+            //取出微信号openID值
+            $open = new Wechat();
+            $open->openid();
+            $openId = $this->openid();
 			/* 调用注册接口注册用户 */
             $User = new UcApi;
-			$uid = $User->register($username, $password, $email); 
+			$uid = $User->register($username, $password, $email,$openId);
 			if(0 < $uid){ //注册成功
 				//TODO: 发送验证邮件
+                $this->msg($openId,$username);
 				$this->success('注册成功！',url('login/index'));
 			} else { //注册失败，显示错误信息
 				$this->error($uid);
@@ -92,6 +99,59 @@ class Login extends Controller {
 			return $this->fetch();
 		}
 	}
+
+    //查找openId
+    public function getConfig()
+    {
+        $config = [
+            'app_id' => 'wxeedcd76523a9c7f5',
+            'secret' => 'c515e8865e47a23d3e6243bd9d325e1c',
+            'token' => 'twothink',
+            'response_type' => 'array',
+
+            'log' => [
+                'level' => 'debug',
+                'file' => '/www/wwwroot/twothink/runtime/log/wechat.log',
+            ],
+            'oauth' => [
+                'scopes' => ['snsapi_base'],
+                'callback' => url('user/login/callback','',true,true),
+            ],
+        ];
+        return $config;
+    }
+    public function openid()
+    {
+        if (!Session::has('openid')){
+            $app = Factory::officialAccount($this->getConfig());
+            Session::get('return_url',url());
+            $response = $app->oauth->scopes(['snsapi_base'])
+                ->redirect()->send();
+        }
+        $openid=Session::get('openid');
+        return $openid;
+    }
+
+    public function callback()
+    {
+        $app = Factory::officialAccount($this->getConfig());
+        $user = $app->oauth->user();
+        Session::set('openid',$user->getId());
+        $this->redirect(Session::get('return_url'));
+    }
+    //消息推送
+    public function msg($openId,$name)
+    {
+        $app = Factory::officialAccount($this->getConfig());
+        $app->template_message->send([
+            'touser' => $openId,
+            'template_id' => '	2CUFoTISKlkRscw93zPqAJUf8lrvmuT23vKlLm-67bU',
+            'url' => 'http://twothink.dumf.vip',
+            'data' => [
+                'name' => $name,
+        ],
+    ]);
+    }
 	/* 退出登录 */
 	public function logout(){
 		if(is_login()){

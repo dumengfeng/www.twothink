@@ -63,7 +63,18 @@ class Document extends Model{
     public function lists($category,$p=1, $order = '`id` DESC', $status = 1, $field = true){
         $map = $this->listMap($category, $status);
         $start=($p-1)*2;
-        return $this->field($field)->with('picture')->where($map)->limit($start,2)->order($order)->select();
+        return $this->field($field)->with('picture')->where($map)->limit($start,5)->order($order)->select();
+    }
+    /**
+     * 获取登录用户信息
+     * @param  number  $category 分类ID
+     * @param  integer $status   状态
+     * @return integer           总数
+     */
+    public function userlist($field = true)
+    {
+        $map='';
+        return $this->field($field,false,'twothink_ucenter_member')->where($map)->select();
     }
 
     /**

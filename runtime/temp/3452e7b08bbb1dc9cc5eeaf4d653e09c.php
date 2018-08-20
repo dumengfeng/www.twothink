@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:72:"D:\TP5\twothink\public/../application/admin/view/default/sign\index.html";i:1533975946;s:73:"D:\TP5\twothink\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:72:"D:\TP5\twothink\public/../application/admin/view/default/sign\index.html";i:1534037958;s:73:"D:\TP5\twothink\public/../application/admin/view/default/public\base.html";i:1534055821;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -131,7 +131,7 @@
 					<tr>
 						<td><input class="ids row-selected" type="checkbox" name="id[]" id="" value="<?php echo $sign['id']; ?>"> </td>
 						<td><?php echo $sign['id']; ?></td>
-						<td><a href="<?php echo url('index?pid='.$sign['id']); ?>"><?php echo $sign['username']; ?></a></td>
+						<td><a href="<?php echo url('index?pid='.$sign['id']); ?>"><?php echo get_username($sign['user_id']); ?></a></td>
                         <td><?php echo $sign['title']; ?></td>
                         <td><?php echo $sign['content']; ?></td>
                         <td><?php echo time_format($sign['create_time']); ?></td>

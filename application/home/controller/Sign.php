@@ -6,6 +6,7 @@ use app\common\controller\UcApi;
 use think\Db;
 use think\Request;
 use app\home\model\Document;
+use think\Session;
 
 /**
  * 文档模型控制器
@@ -21,12 +22,12 @@ class Sign extends Home
         $info = $Document->detail($id['sid']);
         $Api = new UcApi();
         $username = $Api->info($id['uid'])[1];
-        $post_data['username'] = $username;
+        $post_data['user_id'] = $id['uid'];
         $post_data['title'] = $info['title'];
         $post_data['content'] = $info['content'];
         $post_data['create_time'] = time();
         $post_data['update_time'] = '0';
-        var_dump($post_data);
+//        var_dump($post_data);exit();
         //自动验证
         $validate = validate('sign');
         if (!$validate->check($post_data)) {

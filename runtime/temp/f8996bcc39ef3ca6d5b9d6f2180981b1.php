@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:71:"D:\TP5\twothink\public/../application/admin/view/default/sign\edit.html";i:1533971797;s:73:"D:\TP5\twothink\public/../application/admin/view/default/public\base.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:71:"D:\TP5\twothink\public/../application/admin/view/default/sign\edit.html";i:1534037548;s:73:"D:\TP5\twothink\public/../application/admin/view/default/public\base.html";i:1534055821;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -116,19 +116,9 @@
 			</div>
 		</div>
 
-		<div class="form-item">
-			<label class="item-label">住户电话<span class="check-tips">（用于显示的文字）</span></label>
-			<div class="controls">
-				<input type="text" class="text input-large" name="phone" value="<?php echo (isset($info['phone']) && ($info['phone'] !== '')?$info['phone']:''); ?>">
-			</div>
-		</div>
 
-		<div class="form-item">
-			<label class="item-label">住户地址<span class="check-tips">（用于显示的文字）</span></label>
-			<div class="controls">
-				<input type="text" class="text input-large" name="address" value="<?php echo (isset($info['address']) && ($info['address'] !== '')?$info['address']:''); ?>">
-			</div>
-		</div>
+
+
 
 		<div class="form-item">
 			<label class="item-label">活动标题<span class="check-tips">（用于显示的文字）</span></label>

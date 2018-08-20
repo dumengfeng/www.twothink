@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"D:\TP5\twothink\public/../application/home/view/default/index\index.html";i:1533955241;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:72:"D:\TP5\twothink\public/../application/home/view/default/index\index.html";i:1534240200;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -84,7 +84,7 @@
                     </a>
                 </div>
                 <div class="col-xs-4">
-                    <a href="<?php echo url('Article/lists?category='.get_category_name(44)); ?>">
+                    <a href="<?php echo url('Article/lists2?category='.get_category_name(50)); ?>">
                     <div class="indexLabel label-primary">
                     <span class="glyphicon glyphicon-usd"></span><br/>
                     小区租售

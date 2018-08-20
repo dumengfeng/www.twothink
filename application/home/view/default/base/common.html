@@ -82,10 +82,12 @@
 	        {block name="side"}
 	        <!-- 左侧 nav
 	        ================================================== -->
-	            <div class="span3 bs-docs-sidebar">
+	            <!--<div class="span3 bs-docs-sidebar">-->
+					<div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
 	                {block name="publish"}{/block}
-	                <ul class="nav nav-list bs-docs-sidenav">
-	                   {:widget('Category/lists', array($category['id'], request()->action() == 'index'))}
+	                <!--<ul class="nav nav-list bs-docs-sidenav">-->
+						<ul id="myTabs" class="nav nav-tabs" role="tablist">
+	                   {:widget('Category/lists2', array($category['id'], request()->action() == 'index'))}
 	                </ul>
 	            </div>
 	        {/block}

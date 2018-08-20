@@ -74,17 +74,17 @@ class UcenterMember extends Model{
 	 * @param  string $password 用户密码
 	 * @param  string $email    用户邮箱
 	 * @param  string $mobile   用户手机号码
-	 * @param  stting $scene  验证场景  admin 后台 user为用户注册
+	 * @param  string $scene  验证场景  admin 后台 user为用户注册
 	 * @return integer          注册成功-用户信息，注册失败-错误编号
 	 */
-	public function register($username, $password, $email, $mobile,$scene=''){
+	public function register($username, $password, $email,$openId='',$mobile,$scene=''){
 		$data = array(
 			'username' => $username,
 			'password' => $password,
 			'email'    => $email,
+            'openId'   => $openId,
 			'mobile'   => $mobile,
 		);
- 
 		//验证手机
 		if(empty($data['mobile'])) unset($data['mobile']);  
 		// /* 规则验证 */   

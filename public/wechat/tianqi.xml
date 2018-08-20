@@ -1,0 +1,8 @@
+<xml>
+    <ToUserName><![CDATA[<?=$FromUserName?>]]></ToUserName>
+    <FromUserName><![CDATA[<?=$ToUserName?>]]></FromUserName>
+    <CreateTime><?=$Time?/></CreateTime>
+    <MsgType><![CDATA[text]]></MsgType>
+    <Content><![CDATA[<?=$Content?>]]></Content>
+    <MsgId>6589141944644420776</MsgId>
+</xml>

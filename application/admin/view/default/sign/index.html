@@ -33,7 +33,7 @@
 					<tr>
 						<td><input class="ids row-selected" type="checkbox" name="id[]" id="" value="{$sign['id']}"> </td>
 						<td>{$sign.id}</td>
-						<td><a href="{:url('index?pid='.$sign['id'])}">{$sign.username}</a></td>
+						<td><a href="{:url('index?pid='.$sign['id'])}">{$sign.user_id|get_username}</a></td>
                         <td>{$sign.title}</td>
                         <td>{$sign.content}</td>
                         <td>{$sign.create_time|time_format}</td>

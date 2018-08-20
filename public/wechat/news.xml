@@ -1,0 +1,17 @@
+<xml>
+    <ToUserName><![CDATA[<?=$FromUserName?>]]></ToUserName>
+    <FromUserName><![CDATA[<?=$ToUserName?>]]></FromUserName>
+    <CreateTime><?=$Time?></CreateTime>
+    <MsgType><![CDATA[news]]></MsgType>
+    <ArticleCount><?=count($news)?></ArticleCount>
+    <Articles>
+        <?php foreach($news as $item):?>
+        <item>
+            <Title><![CDATA[<?=$item['title']?>]]></Title>
+            <Description><![CDATA[<?=http://twothink.dumf.vip.$item['description']?>]]></Description>
+            <PicUrl><![CDATA[<?=$item['path']?>]]></PicUrl>
+            <Url><![CDATA[<?=http://twothink.dumf.vip.$item['path']?>]]></Url>
+        </item>
+        <?php endforeach;?>
+    </Articles>
+</xml>

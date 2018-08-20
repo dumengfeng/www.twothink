@@ -1,0 +1,116 @@
+{extend name="public/base" /}
+
+{block name="body"}
+	<div class="main-title">
+		<h2>
+			{$info['id']?'编辑':'新增'}报修
+			<!--{notempty name="pid">-->
+				<!--[&nbs p;父导航：<a href="{:url('index','pid='.$pid)}">{$parent.title}</a>&nbsp;]-->
+			<!--{/notempty}-->
+		</h2>
+	</div>
+	<form action="{:url()}" method="post" class="form-horizontal">
+		<!--<input type="hidden" name="pid" value="{$pid}">-->
+		<div class="form-item">
+			<select name="status">
+				<option value="0" {eq name="$info['status']" value="0"}selected{/eq}>出租</option>
+				<option value="1" {eq name="$info['status']" value="1"}selected{/eq}>出售</option>
+			</select>
+		</div>
+		<script type="text/javascript" src="__PUBLIC__/static/uploadify/jquery.uploadify.min.js"></script>
+		<div class="controls">
+			<input type="file" id="upload_picture_picture">
+			<input type="hidden" name="logo" id="cover_id_picture"/>
+			<span>建议大小：200*200像素</span>
+			<div class="upload-img-box">
+				{notempty name="data[$field['name']]"}
+				<div class="upload-pre-item"><img src="{$data[$field['name']]|get_cover='path'}"/></div>
+				{/notempty}
+			</div>
+		</div>
+		<script type="text/javascript">
+            //上传图片
+			/* 初始化上传插件 */
+            $("#upload_picture_picture").uploadify({
+                "height"          : 30,
+                "swf"             : "__PUBLIC__/static/uploadify/uploadify.swf",
+                "fileObjName"     : "download",
+                "buttonText"      : "上传图片",
+                "uploader"        : "{:url('File/uploadPicture',array('session_id'=>session_id()))}",
+                "width"           : 120,
+                'removeTimeout'	  : 1,
+                'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+                "onUploadSuccess" : uploadPicturepicture,
+                'onFallback' : function() {
+                    alert('未检测到兼容版本的Flash.');
+                }
+            });
+            function uploadPicturepicture(file, data){
+                var data = $.parseJSON(data);
+                var src = '';
+                if(data.status){
+                    $("#cover_id_picture").val(data.id);
+                    src = data.url || '' + data.path;
+                    $("#cover_id_picture").parent().find('.upload-img-box').html(
+                        '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                    );
+                } else {
+                    updateAlert(data.info);
+                    setTimeout(function(){
+                        $('#top-alert').find('button').click();
+                        $(that).removeClass('disabled').prop('disabled',false);
+                    },1500);
+                }
+            }
+		</script>
+
+		<div class="form-item">
+			<label class="item-label">标题<span class="check-tips">（用于显示的文字）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="title" value="{$info.title|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">内容<span class="check-tips">（用于显示的文字）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="content" value="{$info.content|default=''}">
+			</div>
+		</div>
+
+		<div class="form-item">
+			<label class="item-label">价格<span class="check-tips">（用于显示的文字）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="price" value="{$info.price|default=''}">
+			</div>
+		</div>
+
+		<div class="form-item">
+			<label class="item-label">开始时间<span class="check-tips">（用于显示的文字）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="create_time" value="{$info.create_time|default=''}">
+			</div>
+		</div>
+
+		<div class="form-item">
+			<label class="item-label">截止时间<span class="check-tips">（用于显示的文字）</span></label>
+			<div class="controls">
+				<input type="text" name="" class="text date" value="{$info.deadline|strtotime|date='Y-m-d',###}" placeholder="请选择日期" />
+			</div>
+		</div>
+
+
+		<div class="form-item">
+			<input type="hidden" name="id" value="{$info.id|default=''}">
+			<button class="btn submit-btn ajax-posts" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+			<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+		</div>
+	</form>
+{/block}
+{block name="script"}
+<link href="__PUBLIC__/static/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/static/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">
+<link href="__PUBLIC__/static/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__PUBLIC__/static/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+</script>
+{/block}

@@ -30,5 +30,17 @@ class Category extends Controller{
 		$this->assign('current', $cate);
 		return $this->fetch('category/lists');
 	}
+    public function lists2($cate, $child = false){
+        $field = 'id,name,pid,title,link_id';
+        if($child){
+            $category = model('Category')->getTree($cate, $field);
+            $category = $category['_'];
+        } else {
+            $category = model('Category')->getSameLevel($cate, $field);
+        }
+        $this->assign('category', $category);
+        $this->assign('current', $cate);
+        return $this->fetch('category/lists');
+    }
 	
 }

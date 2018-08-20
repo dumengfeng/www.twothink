@@ -52,11 +52,12 @@ class UcApi{
      * @param  string $password 用户密码
      * @param  string $email    用户邮箱
      * @param  string $mobile   用户手机号码
-     * @param  stting $scene  验证场景  admin 后台
+     * @param  string $scene  验证场景  admin 后台
+     * @param  string $openId  微信号   openID
      * @return integer          注册成功-用户信息，注册失败-错误编号
      */
-    public function register($username, $password, $email, $mobile = '',$scene=''){
-        return $this->model->register($username, $password, $email, $mobile,$scene);
+    public function register($username, $password, $email,$openId='', $mobile = '',$scene=''){
+        return $this->model->register($username, $password, $email,$openId, $mobile,$scene);
     }
 
     /**

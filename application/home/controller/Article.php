@@ -66,6 +66,47 @@ html;
         }
 	}
 
+    public function lists2($p = 1){
+
+        /* 分类信息 */
+        $category = $this->category();
+        /* 获取当前分类列表 */
+        $Document = new Document();
+        if ($p==1){
+            $list = $Document->lists($category['id']);
+        }else{
+            $list = $Document->lists($category['id'],$p);
+        }
+
+        if(false === $list){
+            $this->error('获取列表数据失败！');
+        }
+
+        if ($p==1){
+            /* 模板赋值并渲染模板 */
+            $this->assign('category', $category);
+            $this->assign('list', $list);
+            return $this->fetch($category['template_lists']);
+        }else{
+            $html='';
+            foreach ($list as $data){
+                $path=$data->picture?$data->picture->path:'/static/static/nopic.jpg';
+                $html=<<<html
+<div class="row noticeList">
+            <div class="col-xs-2">
+                <a href="/home/article/detail/id/{$data->id}.html"><img class="img-thumbnail" src="{$path}"/></a>
+            </div>
+            <div class="col-xs-10">
+                <a href="/home/article/detail/id/{$data->id}.html"><p class="title">{$data['title']}</p></a>
+                <p class="intro">{$data['description']}</p>
+                <p class="info">浏览:({$data['view']}) <span class="pull-right">发表于 {$data['create_time']}</span></p>
+            </div>
+        </div>
+html;
+            }
+            echo $html;
+        }
+    }
 	/* 文档模型详情页 */
 	public function detail($id = 0, $p = 1){
 		/* 标识正确性检测 */

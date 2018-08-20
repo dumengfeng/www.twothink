@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:72:"D:\TP5\twothink\public/../application/home/view/default/repair\edit.html";i:1533813108;s:72:"D:\TP5\twothink\public/../application/home/view/default/base\common.html";i:1496373782;s:69:"D:\TP5\twothink\public/../application/home/view/default/base\var.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:72:"D:\TP5\twothink\public/../application/home/view/default/repair\edit.html";i:1533813108;s:72:"D:\TP5\twothink\public/../application/home/view/default/base\common.html";i:1534240837;s:69:"D:\TP5\twothink\public/../application/home/view/default/base\var.html";i:1496373782;}*/ ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -81,10 +81,12 @@
 	        
 	        <!-- 左侧 nav
 	        ================================================== -->
-	            <div class="span3 bs-docs-sidebar">
+	            <!--<div class="span3 bs-docs-sidebar">-->
+					<div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
 	                
-	                <ul class="nav nav-list bs-docs-sidenav">
-	                   <?php echo widget('Category/lists', array($category['id'], request()->action() == 'index')); ?>
+	                <!--<ul class="nav nav-list bs-docs-sidenav">-->
+						<ul id="myTabs" class="nav nav-tabs" role="tablist">
+	                   <?php echo widget('Category/lists2', array($category['id'], request()->action() == 'index')); ?>
 	                </ul>
 	            </div>
 	        

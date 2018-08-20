@@ -1,0 +1,54 @@
+{extend name="base/common"/}
+{block name="body"}
+<div class="main">
+	<!--导航部分-->
+	<!--导航结束-->
+
+	<div class="container-fluid">
+		{volist name="list" id="data"}
+		<div name="category_id" id="div1" category="{$data.category_id}"></div>
+		<div class="row noticeList">
+			<div class="col-xs-2">
+				<a href="{:url('Article/detail?id='.$data['id'])}"><img class="img-thumbnail"
+																		src="__ROOT__{$data.cover_id|get_cover_path}"/></a>
+			</div>
+			<div class="col-xs-10">
+				<p class="title"><a href="{:url('Article/detail?id='.$data['id'])}">{$data.title}</a></p>
+				<p class="intro">{$data.description}</p>
+
+				<p class="info">浏览: ({$data.view}) <span class="pull-right">发表于 {$data.create_time}</span></p>
+			</div>
+		</div>
+		{/volist}
+		<div id="div">
+		</div>
+		<div id="list">
+			<button class="btn btn-default btn-block get_more" onclick="getLists()">获取更多。。。</button>
+		</div>
+	</div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/home/jquery-1.11.2.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/static/home/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var page = 2;
+        getLists = function () {
+            var category_id = $('#div1').attr('category');
+            if (category_id==null){
+                $('#list').html('<span>没有啦。。。</span>');
+            }
+            $.get('/home/article/lists', "category=" + category_id + "&p=" + page + "", function (data) {
+                if (data) {
+                    $('#div').append(data);
+                } else {
+                    $('#list').html('<span>没有啦。。。</span>');
+                }
+
+            });
+            page++;
+        }
+    });
+</script>
+{/block}

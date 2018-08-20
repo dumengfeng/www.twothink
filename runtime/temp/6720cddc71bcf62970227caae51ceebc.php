@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"D:\TP5\twothink\public/../application/home/view/default/article\article\detail.html";i:1534005492;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"D:\TP5\twothink\public/../application/home/view/default/article\article\detail.html";i:1534037336;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -46,13 +46,13 @@
         <div class="container-fluid">
             <div name="category_id" id="div1" category="<?php echo $info['category_id']; ?>"></div>
             <h3 class="noticeDetailTitle" id="title"><strong><?php echo $info['title']; ?></strong></h3>
-            <div class="noticeDetailInfo" id="uid" uid="<?php echo $info['uid']; ?>">发布者:<?php echo get_username($info['uid']); ?></div>
+            <div class="noticeDetailInfo" id="uid" sid="<?php echo $info['id']; ?>">发布者:<?php echo get_username($info['uid']); ?></div>
             <div class="noticeDetailInfo">发布时间：<?php echo date('Y-m-d H:i',$info['create_time']); ?></div>
             <section id="contents"><?php echo $info['content']; ?></section>
             <?php if($info['category_id']==47): if(!is_login()): ?>
-            <a href="<?php echo url('user/user/profile'); ?>">活动报名</a>
-            <?php endif; ?>
-            <input type="button" value="活动报名" id="btn1" sid="<?php echo $info['id']; ?>" onclick="test()"/><?php echo \think\Cookie::get('password'); endif; ?>
+            <button><a href="<?php echo url('user/user/profile'); ?>">活动报名</a></button>
+            <?php else: ?><input type="button" value="活动报名" id="btn1" uid="<?php echo \think\Session::get('user_auth.uid'); ?>" onclick="test()"/>
+            <?php endif; endif; ?>
         </div>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -63,8 +63,8 @@
     $(function () {
         test = function () {
             var category_id = $('#div1').attr('category');
-            var uid = $('#uid').attr('uid');//住户id
-            var sid = $('#btn1').attr('sid');//活动id
+            var uid = $('#btn1').attr('uid');//住户id
+            var sid = $('#uid').attr('sid');//活动id
             $.post('/home/sign/create', "uid=" + uid +"&sid=" +sid);
         }
     });

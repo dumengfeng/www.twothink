@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:80:"D:\TP5\twothink\public/../application/admin/view/default/article\mydocument.html";i:1496373782;s:73:"D:\TP5\twothink\public/../application/admin/view/default/public\base.html";i:1496373782;s:78:"D:\TP5\twothink\public/../application/admin/view/default/article\sidemenu.html";i:1496373782;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:80:"D:\TP5\twothink\public/../application/admin/view/default/article\mydocument.html";i:1496373782;s:73:"D:\TP5\twothink\public/../application/admin/view/default/public\base.html";i:1534054319;s:78:"D:\TP5\twothink\public/../application/admin/view/default/article\sidemenu.html";i:1496373782;}*/ ?>
 <!doctype html>
 <html>
 <head>
@@ -297,6 +297,11 @@
     </script>
     <script type="text/javascript" src="__PUBLIC__/static/think.js"></script>
     <script type="text/javascript" src="__PUBLIC__/admin/js/common.js"></script>
+    <link href="__PUBLIC__/static/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+    <link href="__PUBLIC__/static/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__PUBLIC__/static/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/static/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
     <script type="text/javascript">
         +function(){
             var $window = $(window), $subnav = $("#subnav"), url;

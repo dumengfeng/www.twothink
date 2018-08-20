@@ -933,7 +933,7 @@ class Query
     public function where($field, $op = null, $condition = null)
     {
         $param = func_get_args();
-        array_shift($param);
+        array_shift($param);                   
         $this->parseWhereExp('AND', $field, $op, $condition, $param);
         return $this;
     }
